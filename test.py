@@ -1,49 +1,26 @@
 import numpy as np
-import pickle
+import time
 
-#4个方向
-def fourWay(pc):
-    s =[pc]
-    for i in range(3):
-        pc=np.rot90(pc)
-        s.append(pc)
-    return s
+""" 
+stage = np.matrix('0 0 0 0 0 0 1; 0 0 0 0 0 0 1; 0 0 0 0 0 0 0; 0 0 0 0 0 0 0; 0 0 0 0 0 0 0; 0 0 0 0 0 0 0; 0 0 0 1 1 1 1 ')
+"""
 
-#去重
-def uniquePcList(pcList):
-    b = set()
-    c = []
-    for x in pcList:
-        key = repr(x)
-        if key not in b:
-            b.add(key)
-            c.append(x)
-    return c
+""" 
+m = np.arange(49).reshape(7,7)
+a = m[2:6,2:4]
+b = np.matrix('0 1; 0 1; 1 1; 1 0')
 
-#一片拼图的所有姿势
-def pcStyles(pc):
-    a = fourWay(pc)
-    b = fourWay(pc.T)
-    c = uniquePcList(a+b)
-    return c
+m[2:6,2:4]+=b
+ """
 
+def test(l):
+    if(len(l)):
+        print(l.pop())
+        time.sleep(1)
+        return test(l)
+    else:
+        print(0)
+        return 0
 
-pcU = np.matrix('1 0 1; 1 1 1')
-pcL = np.matrix('1 1 1; 1 0 0; 1 0 0')
-pcLL = np.matrix('0 0 0 1; 1 1 1 1')
-pcIdx = np.matrix('1 1; 1 1; 1 0')
-pcSqr = np.matrix('1 1 1; 1 1 1')
-pcGun = np.matrix('1 1 1 1; 0 0 1 0')
-pcZ = np.matrix('1 1 0; 0 1 0; 0 1 1')
-pcLz = np.matrix('0 0 1 1; 1 1 1 0')
-
-pcList = [pcU,pcL,pcLL,pcIdx,pcSqr,pcGun,pcZ,pcLz]
-
-pcShapeLib = []
-
-for pc in pcList:
-    pcShapeLib.append(pcStyles(pc))
-
-with open('pcs.pk', 'w+b') as f:
-    pickle.dump(pcShapeLib, f)
-f.close()
+a = [1,2,3,4,5,6,7,8,9,10]
+test(a)
