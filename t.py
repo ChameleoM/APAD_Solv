@@ -30,14 +30,36 @@ def pcSetable(matr,pc):
     else:
         return False
 
+#设置日期
+def setDate(stage,date):
+    mon = date[0]
+    day = date[1]
+    dr = (day+13)//7
+    dc = (day+13)%7
+    if(mon<=6):
+        stage[0,mon-1] = 1
+    else:
+        stage[1,mon-7] = 1
+    stage[dr,dc] = 1
+    return stage
 
-stage = np.matrix('0 0 0 0 0 0 1; 0 0 0 0 0 0 1; 0 0 0 0 0 0 0; 0 0 0 0 0 0 0; 0 0 0 0 0 0 0; 0 0 0 0 0 0 0; 0 0 0 1 1 1 1 ')
+#重置网格
+def stageReset():
+    return(np.matrix('0 0 0 0 0 0 1; 0 0 0 0 0 0 1; 0 0 0 0 0 0 0; 0 0 0 0 0 0 0; 0 0 0 0 0 0 0; 0 0 0 0 0 0 0; 0 0 0 1 1 1 1 '))
+
+
+stage =stageReset()
 pcStyleList = []
 indexList = list(range(8))
+date = [12,3]
+
+dateToSolv = setDate(stage,date)
+
+
 
 
 """ 
 with open('pcs.pk', 'r+b') as f:
     pcStyleList = pickle.load(f)
-f.close()
+f.close() 
  """
