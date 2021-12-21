@@ -10,7 +10,7 @@ def findItem(matr,item):
             ind = i
             break
     if ind==-99:
-        return 'not found'
+        return 0
     else:
         row = int((ind)/w)
         col = (ind)%w
@@ -31,7 +31,8 @@ def pcSetable(matr,pc):
         return False
 
 #设置日期
-def setDate(stage,date):
+def setDate(date):
+    stage =stageInit()
     mon = date[0]
     day = date[1]
     dr = (day+13)//7
@@ -44,16 +45,20 @@ def setDate(stage,date):
     return stage
 
 #重置网格
-def stageReset():
+def stageInit():
     return(np.matrix('0 0 0 0 0 0 1; 0 0 0 0 0 0 1; 0 0 0 0 0 0 0; 0 0 0 0 0 0 0; 0 0 0 0 0 0 0; 0 0 0 0 0 0 0; 0 0 0 1 1 1 1 '))
 
+def main(date):
+    dateToSolv = setDate(date)
 
-stage =stageReset()
+    while(findItem(dateToSolv,0)):
+        pass
+
 pcStyleList = []
 indexList = list(range(8))
 date = [12,3]
 
-dateToSolv = setDate(stage,date)
+
 
 
 
